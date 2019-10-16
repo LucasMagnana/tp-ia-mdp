@@ -57,7 +57,7 @@ public class QLearningAgent extends RLAgent {
 
         //*** VOTRE CODE
         HashMap<Action, Double> actionsRetenues = new HashMap<Action, Double>();
-        double max = 0;
+        double max = -999;
         for (HashMap.Entry<Etat, HashMap<Action, Double>> entry : this.qvaleurs.entrySet()) {
             for (HashMap.Entry<Action, Double> action : entry.getValue().entrySet()) {
                 if (action.getValue() >= max) {
@@ -80,15 +80,17 @@ public class QLearningAgent extends RLAgent {
     @Override
     public double getValeur(Etat e) {
         //*** VOTRE CODE
-        double max = 0.0;
-        if (qvaleurs.get(e) != null) {
+        if (qvaleurs.get(e) == null) {
+            return 0.0;
+        } else {
+            double max = -999;
             for (HashMap.Entry<Action, Double> entry : qvaleurs.get(e).entrySet()) {
                 if (entry.getValue() > max) {
                     max = entry.getValue();
                 }
             }
+            return max;
         }
-        return max;
 
     }
 
