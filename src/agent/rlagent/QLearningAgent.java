@@ -137,16 +137,7 @@ public class QLearningAgent extends RLAgent {
             System.out.println("QL mise a jour etat " + e + " action " + a + " etat' " + esuivant + " r " + reward);
         }
 
-        double maxVal = -999;
-        if (qvaleurs.get(esuivant) != null) {
-            for (HashMap.Entry<Action, Double> voisin : qvaleurs.get(esuivant).entrySet()) {
-                if (voisin.getValue() > maxVal) {
-                    maxVal = voisin.getValue();
-                }
-            }
-        }
-
-        double val = (1 - alpha) * (getQValeur(e, a)) + alpha * (reward + gamma * maxVal);
+        double val = (1 - alpha) * (getQValeur(e, a)) + alpha * (reward + gamma * this.getValeur(esuivant));
         setQValeur(e, a, val);
 
     }
