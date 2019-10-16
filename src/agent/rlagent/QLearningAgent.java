@@ -117,6 +117,13 @@ public class QLearningAgent extends RLAgent {
         }
 
         qvaleurs.get(e).put(a, d);
+        
+        if (vmin > d) {
+            vmin = d;
+        }
+        if (vmax < d) {
+            vmax = d;
+        }
 
         this.notifyObs();
 
