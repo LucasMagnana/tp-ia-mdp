@@ -105,20 +105,8 @@ public class QLearningAgent extends RLAgent {
 				//vmax est la valeur de max pour tout s de V
 				//vmin est la valeur de min pour tout s de V
 				// ...
-                              
                 
-                double maxVal = -999;
-                for (Etat e1 : this.env.getEtatSuccesseurs(e, a)){
-                    for (HashMap.Entry<Action, Double> voisin : qvaleurs.get(e1).entrySet()){
-                        if (voisin.getValue() > maxVal){
-                            maxVal = voisin.getValue();
-                        }
-                    }
-                }
-                
-		double val = (1 - alpha) * (qvaleurs.get(e).get(a)) + alpha * (d + gamma * maxVal);
-                                
-                qvaleurs.get(e).put(a, val);
+                qvaleurs.get(e).put(a, d);
 		
 		this.notifyObs();
 		
@@ -138,7 +126,18 @@ public class QLearningAgent extends RLAgent {
 		if (RLAgent.DISPRL)
 			System.out.println("QL mise a jour etat "+e+" action "+a+" etat' "+esuivant+ " r "+reward);
 
-		//*** VOTRE CODE
+		double maxVal = -999;
+                if (qvaleurs.get(esuivant) != null){
+                    for (HashMap.Entry<Action, Double> voisin : qvaleurs.get(esuivant).entrySet()){
+                        if (voisin.getValue() > maxVal){
+                            maxVal = voisin.getValue();
+                        }
+                    }
+                }
+                
+		double val = (1 - alpha) * (getQValeur(e, a)) + alpha * (reward + gamma * maxVal);
+                setQValeur(e, a, val);
+                
                 
 	}
 
