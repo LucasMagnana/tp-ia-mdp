@@ -84,14 +84,24 @@ public class QLearningAgent extends RLAgent {
 	@Override
 	public double getValeur(Etat e) {
 		//*** VOTRE CODE
-		return 0.0;
+                double max = 0.0;
+                for (HashMap.Entry<Action, Double> entry : qvaleurs.get(e).entrySet()){
+                    if(entry.getValue() > max){
+                        max = entry.getValue();
+                    }
+                }
+		return max;
 		
 	}
 
 	@Override
 	public double getQValeur(Etat e, Action a) {
 		//*** VOTRE CODE
-		return this.qvaleurs.get(e).get(a);
+                if(this.qvaleurs.get(e) != null){
+                    return this.qvaleurs.get(e).get(a);
+                } else {
+                    return 0.0;
+                }
 	}
 	
 	
@@ -106,7 +116,6 @@ public class QLearningAgent extends RLAgent {
 				//vmin est la valeur de min pour tout s de V
 				// ...
                               
-                
                 double maxVal = -999;
                 for (Etat e1 : this.env.getEtatSuccesseurs(e, a)){
                     for (HashMap.Entry<Action, Double> voisin : qvaleurs.get(e1).entrySet()){
