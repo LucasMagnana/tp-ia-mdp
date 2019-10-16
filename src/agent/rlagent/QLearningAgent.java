@@ -115,6 +115,10 @@ public class QLearningAgent extends RLAgent {
 				//vmax est la valeur de max pour tout s de V
 				//vmin est la valeur de min pour tout s de V
 				// ...
+
+                if(qvaleurs.get(e) == null){
+                    qvaleurs.put(e, new HashMap<Action, Double>());
+                }
                 
                 qvaleurs.get(e).put(a, d);
 		
