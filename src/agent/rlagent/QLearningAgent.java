@@ -161,7 +161,9 @@ public class QLearningAgent extends RLAgent {
     public void reset() {
         super.reset();
         //*** VOTRE CODE
-
+        qvaleurs = new HashMap<Etat, HashMap<Action, Double>>();
+        vmax = 0.0;
+        vmin = 0.0;
         this.episodeNb = 0;
         this.notifyObs();
     }
