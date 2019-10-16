@@ -52,13 +52,30 @@ public class QLearningAgent extends RLAgent {
 		// retourne action de meilleures valeurs dans e selon Q : utiliser getQValeur()
 		// retourne liste vide si aucune action legale (etat terminal)
 		List<Action> returnactions = new ArrayList<Action>();
-		if (this.getActionsLegales(e).size() == 0){//etat  absorbant; impossible de le verifier via environnement
+		if (this.getActionsLegales(e).size  () == 0){//etat  absorbant; impossible de le verifier via environnement
 			System.out.println("aucune action legale");
 			return new ArrayList<Action>();
 			
 		}
 		
 		//*** VOTRE CODE
+                HashMap<Action,Double> actionsRetenues = new HashMap<Action,Double>();
+                double max = 0;
+                for (HashMap.Entry<Etat,HashMap<Action,Double>> entry : this.qvaleurs.entrySet()) {
+                    for (HashMap.Entry<Action,Double> action : entry.getValue().entrySet()) {
+                        if(action.getValue() >= max){
+                            max = action.getValue();
+                            actionsRetenues.put(action.getKey(), max);
+                        }
+                    }
+                }
+                
+                for (HashMap.Entry<Action,Double> action : actionsRetenues.entrySet()) {
+                    if(action.getValue() == max){
+                        returnactions.add(action.getKey());
+                    }
+                }
+                
 		return returnactions;
 		
 		
@@ -74,7 +91,7 @@ public class QLearningAgent extends RLAgent {
 	@Override
 	public double getQValeur(Etat e, Action a) {
 		//*** VOTRE CODE
-		return 0;
+		return this.qvaleurs.get(e).get(a);
 	}
 	
 	
@@ -109,6 +126,7 @@ public class QLearningAgent extends RLAgent {
 			System.out.println("QL mise a jour etat "+e+" action "+a+" etat' "+esuivant+ " r "+reward);
 
 		//*** VOTRE CODE
+                
 	}
 
 	@Override
