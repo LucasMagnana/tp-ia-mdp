@@ -11,14 +11,24 @@ import environnement.Etat;
 
  */
 public class EtatPacmanMDPClassic implements Etat , Cloneable{
-
+        int nbDot = 0;
+        int nbGhost;
 	
 	public EtatPacmanMDPClassic(StateGamePacman _stategamepacman){
-	
-		
+            for(int i = 0 ; i < _stategamepacman.getNumberOfPacmans() ; i ++) {
+                nbDot += _stategamepacman.getClosestDot(_stategamepacman.getPacmanState(i));
+            }
+            
+            nbGhost = _stategamepacman.getNumberOfGhosts();
+            
 		
 	}
 	
+        @Override
+        public int hashCode(){
+            return nbDot + nbGhost;
+        }
+        
 	@Override
 	public String toString() {
 		
