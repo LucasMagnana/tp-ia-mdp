@@ -2,12 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/lucas/Documents/FAC/M2/Multi-Agents/tp-ia-mdp/src/agent/planningagent/AgentRandom.java</file>
-            <file>file:/home/lucas/Documents/FAC/M2/Multi-Agents/tp-ia-mdp/src/simuTP1/testRandomAgent.java</file>
-            <file>file:/home/lucas/Documents/FAC/M2/Multi-Agents/tp-ia-mdp/src/simuTP1/testMoveGridworld.java</file>
-            <file>file:/home/lucas/Documents/FAC/M2/Multi-Agents/tp-ia-mdp/src/agent/planningagent/PlanningValueAgent.java</file>
-            <file>file:/home/lucas/Documents/FAC/M2/Multi-Agents/tp-ia-mdp/src/agent/planningagent/ValueIterationAgent.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
