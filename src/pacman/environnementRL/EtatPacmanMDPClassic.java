@@ -29,9 +29,9 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
         closestDot = _stategamepacman.getClosestDot(_stategamepacman.getPacmanState(0));
         nbDot = _stategamepacman.getFoodEaten();
 
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 6; j++) {
-                if (_stategamepacman.isGhost(myPacman.getX() + i - 3, myPacman.getY() + j - 3)) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (_stategamepacman.isGhost(myPacman.getX() + i - 2, myPacman.getY() + j - 2)) {
                     nbGhostAround++;
                 }
             }
@@ -83,7 +83,7 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
     public int hashCode() {
         int dejaImplemente = super.hashCode();
 
-        return Objects.hash(dejaImplemente, closestDot, nbGhostAround, nbDot, score, environnementProche);
+        return Objects.hash(environnementProche, closestDot, nbDot, nbGhostAround, score);
     }
 
     @Override
