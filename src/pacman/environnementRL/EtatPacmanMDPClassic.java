@@ -20,6 +20,8 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
     int nbDot;
     int score;
     String environnementProche;
+    int positionX;
+    int positionY;
 
     public EtatPacmanMDPClassic(StateGamePacman _stategamepacman) {
 
@@ -40,7 +42,7 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
         String str = _stategamepacman.toString();
         ArrayList<ArrayList<Character>> maze = new ArrayList<>();
         maze.add(new ArrayList<>());
-        int j = 0, positionX = 0, positionY = 0;
+        int j = 0;
 
         for (int i = 0; i < str.length(); i++) {
             if (str.charAt(i) == '\n') {
@@ -83,7 +85,7 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
     public int hashCode() {
         int dejaImplemente = super.hashCode();
 
-        return Objects.hash(environnementProche, closestDot, nbDot, nbGhostAround, score);
+        return Objects.hash(environnementProche, closestDot, nbDot, nbGhostAround, score, positionX, positionY);
     }
 
     @Override
@@ -100,7 +102,8 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
         final EtatPacmanMDPClassic other = (EtatPacmanMDPClassic) obj;
 
         return closestDot == other.closestDot && nbGhostAround == other.nbGhostAround
-                && nbDot == other.nbDot && score == other.score && environnementProche.equals(other.environnementProche);
+                && nbDot == other.nbDot && score == other.score && environnementProche.equals(other.environnementProche) && positionX == other.positionX
+                && positionY == other.positionY;
     }
 
     @Override
