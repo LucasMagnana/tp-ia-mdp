@@ -22,6 +22,8 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
     String environnementProche;
     int positionX;
     int positionY;
+    ArrayList<ArrayList<Integer>> tabFood;
+    ArrayList<ArrayList<Integer>> tabGhost;
 
     public EtatPacmanMDPClassic(StateGamePacman _stategamepacman) {
 
@@ -67,8 +69,9 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
         environnementProche = new String();
         if (positionX != 0 && positionY != 0) {
             for (int i = 0; i < 3; i++) {
-                if(i != 0) 
+                if (i != 0) {
                     environnementProche += '\n';
+                }
                 for (int k = 0; k < 3; k++) {
                     environnementProche += maze.get(positionY - 1 + i).get((positionX - 1 + k));
                 }
@@ -79,13 +82,35 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
             System.out.println(environnementProche);
             System.out.println("");*/
         }
+
+        tabFood = new ArrayList<>();
+        tabGhost = new ArrayList<>();
+
+        //System.out.println(str);
+
+        for (int i = 0; i < maze.size(); i++) {
+            for (int k = 0; k < maze.get(i).size(); k++) {
+                if (maze.get(i).get(k) == 'G') {
+                    ArrayList<Integer> g = new ArrayList<>();
+                    g.add(i);
+                    g.add(k);
+                    tabGhost.add(g);
+                } else if (maze.get(i).get(k) == '.') {
+                    ArrayList<Integer> f = new ArrayList<>();
+                    f.add(i);
+                    f.add(k);
+                    tabFood.add(f);
+                }
+            }
+        }
+
     }
 
     @Override
     public int hashCode() {
         int dejaImplemente = super.hashCode();
 
-        return Objects.hash(environnementProche, closestDot, nbDot, nbGhostAround, score, positionX, positionY);
+        return Objects.hash(environnementProche, positionX, positionY, tabGhost, tabFood);
     }
 
     @Override
@@ -101,9 +126,9 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
         }
         final EtatPacmanMDPClassic other = (EtatPacmanMDPClassic) obj;
 
-        return closestDot == other.closestDot && nbGhostAround == other.nbGhostAround
-                && nbDot == other.nbDot && score == other.score && environnementProche.equals(other.environnementProche) && positionX == other.positionX
-                && positionY == other.positionY;
+        return positionX == other.positionX
+                && positionY == other.positionY && tabGhost.equals(other.tabGhost) && tabFood.equals(other.tabFood) &&
+                environnementProche.equals(other.environnementProche);
     }
 
     @Override
