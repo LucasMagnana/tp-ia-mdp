@@ -87,7 +87,7 @@ public class QLearningAgent extends RLAgent {
         }*/
         
         List<Action> actions = env.getActionsPossibles(e);
-        double max = -999;
+        double max = -999999999;
         for(Action a :  actions){
             double qval = this.getQValeur(e, a);
             if(qval > max){
