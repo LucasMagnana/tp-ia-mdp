@@ -22,6 +22,7 @@ public class QLearningAgent extends RLAgent {
      * cette methode notifie la vue
      */
     protected HashMap<Etat, HashMap<Action, Double>> qvaleurs;
+    Environnement env;
 
     //AU CHOIX: vous pouvez utiliser une Map avec des Pair pour clés si vous préférez
     //protected HashMap<Pair<Etat,Action>,Double> qvaleurs;
@@ -35,6 +36,7 @@ public class QLearningAgent extends RLAgent {
             Environnement _env) {
         super(alpha, gamma, _env);
         qvaleurs = new HashMap<Etat, HashMap<Action, Double>>();
+        env = _env;
 
     }
 
@@ -72,7 +74,7 @@ public class QLearningAgent extends RLAgent {
     @Override
     public double getValeur(Etat e) {
         //*** VOTRE CODE
-        if (qvaleurs.get(e) == null) {
+        /*if (qvaleurs.get(e) == null) {
             return 0.0;
         } else {
             double max = -999;
@@ -82,8 +84,17 @@ public class QLearningAgent extends RLAgent {
                 }
             }
             return max;
+        }*/
+        
+        List<Action> actions = env.getActionsPossibles(e);
+        double max = -999;
+        for(Action a :  actions){
+            double qval = this.getQValeur(e, a);
+            if(qval > max){
+                max = qval;
+            }
         }
-
+        return max;
     }
 
     @Override

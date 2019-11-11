@@ -22,6 +22,7 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
     String environnementProche;
     int positionX;
     int positionY;
+    int tailleMap;
     ArrayList<ArrayList<Integer>> tabFood;
     ArrayList<ArrayList<Integer>> tabGhost;
 
@@ -58,6 +59,7 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
             }
         }
         maze.remove(maze.size() - 1);
+        tailleMap = maze.size()*maze.get(0).size();
         positionX = positionX % (maze.get(0).size());
         for (int i = 0; i < maze.get(positionY).size(); i++) {
             if (maze.get(positionY).get(i) == 'P') {
@@ -144,6 +146,10 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
 
         // on renvoie le clone
         return clone;
+    }
+    
+    public int getDimensions(){
+        return 1000;
     }
 
 }
