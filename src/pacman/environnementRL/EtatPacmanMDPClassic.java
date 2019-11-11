@@ -66,7 +66,7 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
             }
         }
 
-        environnementProche = new String();
+        /*environnementProche = new String();
         if (positionX != 0 && positionY != 0) {
             for (int i = 0; i < 3; i++) {
                 if (i != 0) {
@@ -77,11 +77,7 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
                 }
             }
 
-            /*System.out.println(str);
-            System.out.println("");
-            System.out.println(environnementProche);
-            System.out.println("");*/
-        }
+        }*/
 
         tabFood = new ArrayList<>();
         tabGhost = new ArrayList<>();
@@ -108,9 +104,7 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
 
     @Override
     public int hashCode() {
-        int dejaImplemente = super.hashCode();
-
-        return Objects.hash(environnementProche, positionX, positionY, tabGhost, tabFood);
+        return Objects.hash(positionX, positionY, tabGhost, tabFood);
     }
 
     @Override
@@ -127,8 +121,7 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
         final EtatPacmanMDPClassic other = (EtatPacmanMDPClassic) obj;
 
         return positionX == other.positionX
-                && positionY == other.positionY && tabGhost.equals(other.tabGhost) && tabFood.equals(other.tabFood) &&
-                environnementProche.equals(other.environnementProche);
+                && positionY == other.positionY && tabGhost.equals(other.tabGhost) && tabFood.equals(other.tabFood);
     }
 
     @Override
