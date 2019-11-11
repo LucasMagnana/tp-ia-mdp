@@ -67,7 +67,7 @@ public class QLApproxAgent extends QLearningAgent{
                     }
                 }
                 for(int i=0; i<M;i++){
-                    vectPoids[i] = vectPoids[i]+alpha*(reward+gamma*maxQValB-this.getQValeur(e,a))*this.featurefunction.getFeatures(e, a)[i];
+                    vectPoids[i] = vectPoids[i]+alpha*(reward+(gamma*maxQValB)-this.getQValeur(e,a))*this.featurefunction.getFeatures(e, a)[i];
                 }
 		
 		

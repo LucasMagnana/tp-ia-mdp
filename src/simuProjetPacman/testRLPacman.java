@@ -28,10 +28,10 @@ import agent.strategy.StrategyExplorationTest1;
 
 public class testRLPacman extends Application{
 	/** type de labyrinthe pour le jeu de pacman*/
-	static String mazename = "pacmanlayouts/smallGrid.lay";//smallGrid smallGrid2 mediumGrid
+	static String mazename = "pacmanlayouts/smallGrid2.lay";//smallGrid smallGrid2 mediumGrid
 
 	// parametres RL*/
-	static double gamma=0.95;
+	static double gamma=0.8;
 	static double alpha=0.1;
 	static double _epsilon = 0.05;
 	

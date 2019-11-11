@@ -66,7 +66,7 @@ public class FeatureFunctionPacman implements FeatureFunction {
         }
         
         //DOTS
-        if (stategamepacman.isGhost(pacmanstate_next.getX(), pacmanstate_next.getY())) {
+        if (stategamepacman.getMaze().isFood(pacmanstate_next.getX(), pacmanstate_next.getY())) {
             vfeatures[2]=1;
         }
         
