@@ -79,7 +79,7 @@ public class QLApproxAgent extends QLearningAgent{
 		this.qvaleurs.clear();
 	
 		//*** VOTRE CODE
-		
+		vectPoids = new double[M];
 		this.episodeNb =0;
 		this.notifyObs();
 	}
