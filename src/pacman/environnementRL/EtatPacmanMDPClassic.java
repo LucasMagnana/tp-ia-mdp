@@ -23,6 +23,8 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
     int positionX;
     int positionY;
     int tailleMap;
+    int nbGhost;
+    int nbPacman;
     ArrayList<ArrayList<Integer>> tabFood;
     ArrayList<ArrayList<Integer>> tabGhost;
 
@@ -33,6 +35,8 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
         score = _stategamepacman.getScore();
         closestDot = _stategamepacman.getClosestDot(_stategamepacman.getPacmanState(0));
         nbDot = _stategamepacman.getFoodEaten();
+        nbGhost = _stategamepacman.getNumberOfGhosts();
+        nbPacman = _stategamepacman.getNumberOfPacmans();
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -149,7 +153,7 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
     }
     
     public int getDimensions(){
-        return 1000;
+        return tailleMap*nbPacman + tailleMap*nbGhost + nbDot*2;
     }
 
 }
