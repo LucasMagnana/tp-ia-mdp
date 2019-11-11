@@ -34,7 +34,6 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
 
         score = _stategamepacman.getScore();
         closestDot = _stategamepacman.getClosestDot(_stategamepacman.getPacmanState(0));
-        nbDot = _stategamepacman.getFoodEaten();
         nbGhost = _stategamepacman.getNumberOfGhosts();
         nbPacman = _stategamepacman.getNumberOfPacmans();
 
@@ -153,7 +152,8 @@ public class EtatPacmanMDPClassic implements Etat, Cloneable {
     }
     
     public int getDimensions(){
-        return tailleMap*nbPacman + tailleMap*nbGhost + nbDot*2;
+        //System.out.println(tailleMap*nbPacman + tailleMap*nbGhost + nbDot*2);
+        return tailleMap*nbPacman * tailleMap*nbGhost * tabFood.size() * 2;
     }
 
 }
