@@ -49,7 +49,7 @@ public class FeatureFunctionPacman implements FeatureFunction {
         //*** VOTRE CODE
         
         //BIAIS
-        vfeatures[0] = 1;
+        vfeatures[0] = 1.0;
         
         //FANTOMES
         if (stategamepacman.isGhost(pacmanstate_next.getX() - 1, pacmanstate_next.getY())) {
@@ -71,8 +71,9 @@ public class FeatureFunctionPacman implements FeatureFunction {
         }
         
         //DIST/MAPSIZE
-        vfeatures[3] = stategamepacman.getClosestDot(pacmanstate_next)/(stategamepacman.getMaze().getSizeX()*stategamepacman.getMaze().getSizeY());
-
+        double sizeMap = (double)stategamepacman.getMaze().getSizeX()*stategamepacman.getMaze().getSizeY();
+        vfeatures[3] = (double)(stategamepacman.getClosestDot(pacmanstate_next))/sizeMap;
+        
         return vfeatures;
     }
 
