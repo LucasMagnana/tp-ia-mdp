@@ -29,15 +29,13 @@ public class QLApproxAgent extends QLearningAgent{
                 vectPoids = new double[M];
                 featurefunction = _featurefunction;
                 env = _env;
-                
-		
 	}
 
 	
 	@Override
 	public double getQValeur(Etat e, Action a) {
 		//*** VOTRE CODE
-                double qval = 0;
+                double qval = 0.0;
                 double[] feature = featurefunction.getFeatures(e,a);
                 for(int i=0; i<M; i++){
                     qval += feature[i]*vectPoids[i];
@@ -59,15 +57,16 @@ public class QLApproxAgent extends QLearningAgent{
 		
 		//*** VOTRE CODE
                 List<Action> tabB = env.getActionsPossibles(esuivant);
-                double maxQValB = -999, qValB;
+                double maxQValB = -9999, qValB;
                 for(Action b : tabB){
                     qValB = this.getQValeur(esuivant, b);
                     if(qValB > maxQValB){
                         maxQValB = qValB;
                     }
                 }
+                
                 for(int i=0; i<M;i++){
-                    vectPoids[i] = vectPoids[i]+alpha*(reward+(gamma*maxQValB)-this.getQValeur(e,a))*this.featurefunction.getFeatures(e, a)[i];
+                    vectPoids[i] = vectPoids[i]+ alpha*(reward+(gamma*maxQValB)-this.getQValeur(e,a))*this.featurefunction.getFeatures(e, a)[i];
                 }
 		
 		

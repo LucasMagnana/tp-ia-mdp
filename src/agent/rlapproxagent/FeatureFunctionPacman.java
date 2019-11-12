@@ -52,7 +52,7 @@ public class FeatureFunctionPacman implements FeatureFunction {
         vfeatures[0] = 1.0;
         
         //FANTOMES
-        if (stategamepacman.isGhost(pacmanstate_next.getX() - 1, pacmanstate_next.getY())) {
+        /*if (stategamepacman.isGhost(pacmanstate_next.getX() - 1, pacmanstate_next.getY())) {
             vfeatures[1]++;
         }
         if (stategamepacman.isGhost(pacmanstate_next.getX() + 1, pacmanstate_next.getY())) {
@@ -63,7 +63,9 @@ public class FeatureFunctionPacman implements FeatureFunction {
         }
         if (stategamepacman.isGhost(pacmanstate_next.getX(), pacmanstate_next.getY() + 1)) {
             vfeatures[1]++;
-        }
+        }*/
+        
+        vfeatures[1] = getGhostNumber(stategamepacman, pacmanstate_next);
         
         //DOTS
         if (stategamepacman.getMaze().isFood(pacmanstate_next.getX(), pacmanstate_next.getY())) {
@@ -81,5 +83,24 @@ public class FeatureFunctionPacman implements FeatureFunction {
         vfeatures = new double[4];
 
     }
+    
+    	private int getGhostNumber(StateGamePacman state, StateAgentPacman next){
+		int cpt = 0;
+		StateAgentPacman ghost;
+		for(int i=0; i<state.getNumberOfGhosts(); i++){
+			ghost = state.getGhostState(i);
+                        if (ghost.getX() == next.getX() && ghost.getY() == next.getY()){
+                            cpt++;
+                        }
+			for(int j=0; j<4; j++){
+				int npos[] = state.getNextPosition(new ActionPacman(j), ghost);
+				if(npos[0]==next.getX() && npos[1]==next.getY()){
+					cpt++;
+					break;
+				}
+			}
+		}
+		return cpt;
+	}
 
 }
