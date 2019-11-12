@@ -71,8 +71,11 @@ public class ValueIterationAgent extends PlanningValueAgent {
         //Dans cette classe, il  faut juste mettre a jour delta 
         this.delta = 0.0;
         //*** VOTRE CODE
+        
+        vmin = 999;
+        vmax = -999;
 
-        double max = 0, sum = 0, delta_tmp;
+        double max = -999, sum = 0, delta_tmp;
         HashMap<Etat, Double> V_prec = (HashMap<Etat, Double>) this.V.clone();
         for (HashMap.Entry<Etat, Double> entry : this.V.entrySet()) {
             Etat s = entry.getKey();
@@ -89,11 +92,20 @@ public class ValueIterationAgent extends PlanningValueAgent {
                     Logger.getLogger(ValueIterationAgent.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            
+            if (max > vmax) {
+                vmax = max;
+            }
+            if (max < vmin){
+                vmin = max;
+            }
+            
             delta_tmp = Math.abs(this.V.get(s) - max);
             if (delta_tmp > this.delta) {
                 this.delta = delta_tmp;
             }
             entry.setValue(max);
+            
             max = 0;
         }
 
@@ -143,7 +155,7 @@ public class ValueIterationAgent extends PlanningValueAgent {
         // retourne liste vide si aucune action legale (etat absorbant)
         List<Action> returnactions = new ArrayList<Action>();
         HashMap<Action, Double> actionsRetenues = new HashMap<Action, Double>();
-        double sum = 0, max = 0;
+        double sum = 0, max = -999;
         for (Action a : this.mdp.getActionsPossibles(_e)) {
             try {
                 for (HashMap.Entry<Etat, Double> voisin : this.mdp.getEtatTransitionProba(_e, a).entrySet()) {
@@ -174,6 +186,10 @@ public class ValueIterationAgent extends PlanningValueAgent {
         super.reset();
         //reinitialise les valeurs de V 
         //*** VOTRE CODE
+        
+        for (Map.Entry<Etat, Double> entry:this.V.entrySet()){
+			entry.setValue(0.0);
+        }
 
         this.notifyObs();
     }
